@@ -1,7 +1,7 @@
 export default class Daihon {
-  constructor(texts) {
+  constructor(serifusInfo) {
     this.curentSerifuIndex = 0
-    this.serifus = this._getSerifus(texts)
+    this.serifus = this._getSerifus(serifusInfo)
   }
 
   _getSerifus(texts) {
