@@ -33,6 +33,18 @@ export class Roudokuka {
     })
   }
 
+  getUtterance(text) {
+    let utterance = new SpeechSynthesisUtterance(text)
+    utterance.onend = () => {
+      if(this.canceled) {
+        this.canceled = false
+      } else {
+        this.start()
+      }
+    }
+    return utterance
+  }
+
   start(serifuIndex) {
     if(speechSynthesis.speaking) {
       this.canceled = true
@@ -40,24 +52,25 @@ export class Roudokuka {
     if(serifuIndex >= 0) {
       this.daihon.curentSerifuIndex = serifuIndex
     }
-    speechSynthesis.cancel()
+
     this._stopResumer()
     this._startResumer()
+    speechSynthesis.cancel()
 
     if(this.daihon.isEnd()) {
+      // daihon end
       this._stopResumer()
-      speechSynthesis.cancel()
     } else {
       this.currentSerifu = this.daihon.getNextSerifu()
-      this.currentSerifu.onend = () => {
-        if(this.canceled) {
-          this.canceled = false
-        } else {
-          this._stopResumer()
-          this.start()
-        }
-      }
-      speechSynthesis.speak(this.currentSerifu)
+      speechSynthesis.speak(this.getUtterance(this.currentSerifu.text))
     }
+  }
+
+  stop() {
+    if(speechSynthesis.speaking) {
+      this.canceled = true
+    }
+    speechSynthesis.cancel()
+    this._stopResumer()
   }
 }
