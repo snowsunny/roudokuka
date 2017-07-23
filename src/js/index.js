@@ -9,6 +9,16 @@ export class Roudokuka {
     this.canceled = false
   }
 
+  _startResumer() {
+    this.resumer = setInterval(() => {
+      speechSynthesis.resume()
+    }, 5000)
+  }
+
+  _stopResumer() {
+    clearInterval(this.resumer)
+  }
+
   onReady() {
     speechSynthesis.cancel()
     return new Promise((resolve, reject) => {
@@ -28,17 +38,14 @@ export class Roudokuka {
       this.canceled = true
     }
     if(serifuIndex >= 0) {
-      clearInterval(this.resumer)
       this.daihon.curentSerifuIndex = serifuIndex
     }
     speechSynthesis.cancel()
-
-    this.resumer = setInterval(() => {
-      speechSynthesis.resume()
-    }, 5000)
+    this._stopResumer()
+    this._startResumer()
 
     if(this.daihon.isEnd()) {
-      clearInterval(this.resumer)
+      this._stopResumer()
       speechSynthesis.cancel()
     } else {
       this.currentSerifu = this.daihon.getNextSerifu()
@@ -46,7 +53,7 @@ export class Roudokuka {
         if(this.canceled) {
           this.canceled = false
         } else {
-          clearInterval(this.resumer)
+          this._stopResumer()
           this.start()
         }
       }
