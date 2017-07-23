@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roudokuka examples</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="roudokuka.min.js"></script></head>
+  <body>
+    <h1>Roudokuka examples</h1>
+    <script type="text/javascript">
+      $(() => {
+        let roudokuka = new Roudokuka(['cat cat cat', 'dog dog dog'])
+        roudokuka.onReady().then(() => {
+          roudokuka.start(1)
+        })
+      })
+    </script>
+  </body>
+</html>
