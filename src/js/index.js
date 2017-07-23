@@ -5,6 +5,7 @@ export class Roudokuka {
     this.daihon = new Daihon(texts)
     this.voices = []
     this.currentSerifu = undefined
+    this.repeater = undefined
   }
 
   onReady() {
@@ -23,21 +24,22 @@ export class Roudokuka {
 
   start(serifuIndex) {
     if(serifuIndex >= 0) {
+      clearInterval(this.repeater)
       this.daihon.curentSerifuIndex = serifuIndex
     }
 
-    let repeater = setInterval(() => {
+    this.repeater = setInterval(() => {
       speechSynthesis.pause()
       speechSynthesis.resume()
     }, 5000)
 
     if(this.daihon.isEnd()) {
-      clearInterval(repeater)
+      clearInterval(this.repeater)
       speechSynthesis.cancel()
     } else {
       this.currentSerifu = this.daihon.getNextSerifu()
       this.currentSerifu.onend = () => {
-        clearInterval(repeater)
+        clearInterval(this.repeater)
         this.start()
       }
       speechSynthesis.speak(this.currentSerifu)
