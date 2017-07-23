@@ -6,6 +6,7 @@ export class Roudokuka {
     this.voices = []
     this.currentSerifu = undefined
     this.repeater = undefined
+    this.canceled = false
   }
 
   onReady() {
@@ -23,10 +24,14 @@ export class Roudokuka {
   }
 
   start(serifuIndex) {
+    if(speechSynthesis.speaking) {
+      this.canceled = true
+    }
     if(serifuIndex >= 0) {
       clearInterval(this.repeater)
       this.daihon.curentSerifuIndex = serifuIndex
     }
+    speechSynthesis.cancel()
 
     this.repeater = setInterval(() => {
       speechSynthesis.pause()
@@ -39,8 +44,12 @@ export class Roudokuka {
     } else {
       this.currentSerifu = this.daihon.getNextSerifu()
       this.currentSerifu.onend = () => {
-        clearInterval(this.repeater)
-        this.start()
+        if(this.canceled) {
+          this.canceled = false
+        } else {
+          clearInterval(this.repeater)
+          this.start()
+        }
       }
       speechSynthesis.speak(this.currentSerifu)
     }
