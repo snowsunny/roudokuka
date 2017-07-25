@@ -1,10 +1,10 @@
-import Daihon from 'Daihon'
+import Libretto from 'Libretto'
 
 export class Roudokuka {
   constructor(texts, options) {
-    this.daihon = new Daihon(texts)
+    this.libretto = new Libretto(texts)
     this.voices = []
-    this.currentSerifu = undefined
+    this.currentLine = undefined
     this.resumer = undefined
     this.canceled = false
   }
@@ -45,24 +45,24 @@ export class Roudokuka {
     return utterance
   }
 
-  start(serifuIndex) {
+  start(lineIndex) {
     if(speechSynthesis.speaking) {
       this.canceled = true
     }
-    if(serifuIndex >= 0) {
-      this.daihon.curentSerifuIndex = serifuIndex
+    if(lineIndex >= 0) {
+      this.libretto.curentLineIndex = lineIndex
     }
 
     this._stopResumer()
     this._startResumer()
     speechSynthesis.cancel()
 
-    if(this.daihon.isEnd()) {
-      // daihon end
+    if(this.libretto.isEnd()) {
+      // libretto end
       this._stopResumer()
     } else {
-      this.currentSerifu = this.daihon.getNextSerifu()
-      speechSynthesis.speak(this.getUtterance(this.currentSerifu.text))
+      this.currentLine = this.libretto.getNextLine()
+      speechSynthesis.speak(this.getUtterance(this.currentLine.text))
     }
   }
 
