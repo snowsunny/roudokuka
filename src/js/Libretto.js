@@ -1,12 +1,18 @@
+import _merge from 'lodash/merge'
+
 export default class Libretto {
   constructor(linesInfo) {
     this.curentLineIndex = 0
-    this.lines = this._getLines(linesInfo)
+    this.lines = this._createLines(linesInfo)
   }
 
-  _getLines(texts) {
-    return texts.map((text) => {
-      return new SpeechSynthesisUtterance(text)
+  _createLines(linesInfo) {
+    return linesInfo.map((lineInfo, index) => {
+      if(Object.prototype.toString.call(lineInfo) == '[object String]') {
+        return {index: index, text: lineInfo}
+      } else {
+        return _merge(lineInfo, {index: index})
+      }
     })
   }
 
