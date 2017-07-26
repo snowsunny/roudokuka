@@ -1,12 +1,31 @@
 import Libretto from 'Libretto'
+import _merge from 'lodash/merge'
 
 export class Roudokuka {
   constructor(texts, options) {
     this.libretto = new Libretto(texts)
     this.voices = []
     this.currentLine = undefined
+    this.utterance = undefined
     this.resumer = undefined
     this.canceled = false
+
+    this.defaultOptions = {
+      lang: "",
+      onboundary: null,
+      onend: null,
+      onerror: null,
+      onmark: null,
+      onpause: null,
+      onresume: null,
+      onstart: null,
+      pitch: 1,
+      rate: 1,
+      voice: null,
+      volume: 1,
+      onLibrettoEnd: undefined
+    }
+    this.options = _merge(this.defaultOptions, options)
   }
 
   _startResumer() {
@@ -33,16 +52,28 @@ export class Roudokuka {
     })
   }
 
-  getUtterance(text) {
-    let utterance = new SpeechSynthesisUtterance(text)
-    utterance.onend = () => {
+  getUtterance(line) {
+    this.utterance = new SpeechSynthesisUtterance()
+    _merge(this.utterance, this.options, line)
+
+    let advancedCallbacks = {list: ['onend']}
+    advancedCallbacks.list.map((name) => {
+      if(Object.prototype.toString.call(this.utterance[name]) == '[object Function]') {
+        return advancedCallbacks[name] = this.utterance[name]
+      }
+    })
+
+    this.utterance.onend = (e) => {
       if(this.canceled) {
         this.canceled = false
       } else {
+        if(advancedCallbacks.onend) {
+          advancedCallbacks.onend(e, this.currentLine)
+        }
         this.start()
       }
     }
-    return utterance
+    return this.utterance
   }
 
   start(lineIndex) {
@@ -58,11 +89,14 @@ export class Roudokuka {
     speechSynthesis.cancel()
 
     if(this.libretto.isEnd()) {
-      // libretto end
+      this.libretto.curentLineIndex = 0
       this._stopResumer()
+      if(Object.prototype.toString.call(this.options.onLibrettoEnd) == '[object Function]') {
+        this.options.onLibrettoEnd()
+      }
     } else {
       this.currentLine = this.libretto.getNextLine()
-      speechSynthesis.speak(this.getUtterance(this.currentLine.text))
+      speechSynthesis.speak(this.getUtterance(this.currentLine))
     }
   }
 

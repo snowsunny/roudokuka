@@ -7,12 +7,20 @@
   <body>
     <h1>Roudokuka examples</h1>
     <script type="text/javascript">
-      $(() => {
-        let roudokuka = new Roudokuka(['cat cat cat', 'dog dog dog'])
-        roudokuka.onReady().then(() => {
-          roudokuka.start(1)
+      /*$(() => {*/
+        let roudokuka = new Roudokuka(['1', '2', '3'], {
+          onend: (e, currentLine) => {
+            /*console.log(e, currentLine)*/
+          },
+          onLibrettoEnd: () => {
+            console.log('LibrettoEnd')
+            roudokuka.start()
+          }
         })
-      })
+        roudokuka.onReady().then(() => {
+          roudokuka.start()
+        })
+      /*})*/
     </script>
   </body>
 </html>
