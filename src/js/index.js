@@ -63,6 +63,11 @@ export class Roudokuka {
     this.utterance = new SpeechSynthesisUtterance()
     _merge(this.utterance, this.options, line)
 
+    // fix rate for chrome
+    if(this.utterance.rate > 2) {
+      this.utterance.rate = 2
+    }
+
     let advancedCallbacks = {list: ['onend', 'onpause', 'onresume']}
     advancedCallbacks.list.forEach((name) => {
       if(Object.prototype.toString.call(this.utterance[name]) == '[object Function]') {
