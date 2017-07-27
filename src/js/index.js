@@ -29,13 +29,18 @@ export class Roudokuka {
   }
 
   _startResumer() {
-    this.resumer = setInterval(() => {
+    this.resumer.push(setInterval(() => {
       speechSynthesis.resume()
-    }, 5000)
+    }, 5000))
   }
 
   _stopResumer() {
-    clearInterval(this.resumer)
+    if(this.resumer.length) {
+      this.resumer.forEach((id) => {
+        clearInterval(id)
+      })
+      this.resumer = []
+    }
   }
 
   onReady() {
