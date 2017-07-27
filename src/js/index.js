@@ -6,8 +6,6 @@ export class Roudokuka {
     this.libretto = new Libretto(texts)
     this.voices = []
     this.currentLine = undefined
-    this.utterance = undefined
-    this.resumer = undefined
     this.interrupted = false
 
     this.defaultOptions = {
@@ -16,8 +14,8 @@ export class Roudokuka {
       onend: null,
       onerror: null,
       onmark: null,
-      onpause: null,
-      onresume: null,
+      onpause: null, // stil buggy
+      onresume: null, // stil buggy
       onstart: null,
       pitch: 1,
       rate: 1,
@@ -26,6 +24,10 @@ export class Roudokuka {
       onLibrettoEnd: undefined
     }
     this.options = _merge(this.defaultOptions, options)
+
+    // fix for chrome
+    this.utterance = undefined // continuous play
+    this.resumer = [] // speak with long text
   }
 
   _startResumer() {
