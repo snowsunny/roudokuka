@@ -61,10 +61,10 @@ export class Roudokuka {
     this.utterance = new SpeechSynthesisUtterance()
     _merge(this.utterance, this.options, line)
 
-    let advancedCallbacks = {list: ['onend']}
-    advancedCallbacks.list.map((name) => {
+    let advancedCallbacks = {list: ['onend', 'onpause', 'onresume']}
+    advancedCallbacks.list.forEach((name) => {
       if(Object.prototype.toString.call(this.utterance[name]) == '[object Function]') {
-        return advancedCallbacks[name] = this.utterance[name]
+        advancedCallbacks[name] = this.utterance[name]
       }
     })
 
@@ -78,6 +78,19 @@ export class Roudokuka {
         this.start()
       }
     }
+    this.utterance.onpause = (e) => {
+      this._stopResumer()
+      if(advancedCallbacks.onpause) {
+        advancedCallbacks.onpause(e, this.currentLine)
+      }
+    }
+    this.utterance.onresume = (e) => {
+      if(this.resumer.length == 0 && advancedCallbacks.onresume) {
+        advancedCallbacks.onresume(e, this.currentLine)
+        this._startResumer()
+      }
+    }
+
     return this.utterance
   }
 
