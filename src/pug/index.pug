@@ -6,17 +6,30 @@ html
   body
     h1 Roudokuka examples
     script(type='text/javascript').
-      /*$(() => {*/
-        let roudokuka = new Roudokuka(['1', '2', '3'], {
-          onend: (e, currentLine) => {
-            /*console.log(e, currentLine)*/
-          },
-          onLibrettoEnd: () => {
-            console.log('LibrettoEnd')
-            roudokuka.start()
-          }
-        })
-        roudokuka.onReady().then(() => {
+      let lines = []
+      for(let i = 1; i <= 40; i++) {
+        if(i % 3 == 0 || /3/.test(i)) {
+          lines.push({
+            text: i.toString(),
+            rate: 1.7,
+            pitch: 2
+          })
+        } else {
+          lines.push(i.toString())
+        }
+      }
+      let roudokuka = new Roudokuka(lines, {
+        onend: (e, currentLine) => {
+          console.log('onend: ', e, currentLine)
+        },
+        onresume: (e, currentLine) => {
+          console.log('onend: ', e, currentLine)
+        },
+        onLibrettoEnd: (e, currentLine) => {
+          console.log('onLibrettoEnd: ', e, currentLine)
           roudokuka.start()
-        })
-      /*})*/
+        }
+      })
+      roudokuka.onReady().then(() => {
+        roudokuka.start()
+      })
