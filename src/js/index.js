@@ -8,7 +8,7 @@ export class Roudokuka {
     this.currentLine = undefined
     this.utterance = undefined
     this.resumer = undefined
-    this.canceled = false
+    this.interrupted = false
 
     this.defaultOptions = {
       lang: "",
@@ -69,8 +69,8 @@ export class Roudokuka {
     })
 
     this.utterance.onend = (e) => {
-      if(this.canceled) {
-        this.canceled = false
+      if(this.interrupted) {
+        this.interrupted = false
       } else {
         if(advancedCallbacks.onend) {
           advancedCallbacks.onend(e, this.currentLine)
@@ -83,7 +83,7 @@ export class Roudokuka {
 
   start(lineIndex) {
     if(speechSynthesis.speaking) {
-      this.canceled = true
+      this.interrupted = true
     }
     if(lineIndex >= 0) {
       this.libretto.curentLineIndex = lineIndex
@@ -107,7 +107,7 @@ export class Roudokuka {
 
   stop() {
     if(speechSynthesis.speaking) {
-      this.canceled = true
+      this.interrupted = true
     }
     speechSynthesis.cancel()
     this._stopResumer()
