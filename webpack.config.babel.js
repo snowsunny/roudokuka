@@ -36,7 +36,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/pug/index.pug',
