@@ -1,4 +1,4 @@
-import Libretto from 'Libretto'
+import Libretto from './Libretto'
 import _merge from 'lodash/merge'
 
 export default class Roudokuka {
