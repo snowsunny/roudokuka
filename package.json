@@ -1,8 +1,9 @@
 {
   "name": "roudokuka",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "repository": "snowsunny/roudokuka",
+  "files": "src/js/",
   "main": "src/js/Roudokuka.js",
   "keywords": [
     "reader",
