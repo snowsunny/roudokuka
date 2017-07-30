@@ -1,4 +1,8 @@
 {
+  "name": "roudokuka",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "src/js/Roudokuka.js",
   "devDependencies": {
     "babel-core": ">=6.25.0",
     "babel-loader": ">=7.1.0",
