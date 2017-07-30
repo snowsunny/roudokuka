@@ -1,8 +1,15 @@
 {
   "name": "roudokuka",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
+  "repository": "snowsunny/roudokuka",
   "main": "src/js/Roudokuka.js",
+  "keywords": [
+    "reader",
+    "speech-synthesis",
+    "tts",
+    "voice"
+  ],
   "devDependencies": {
     "babel-core": ">=6.25.0",
     "babel-loader": ">=7.1.0",
