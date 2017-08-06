@@ -14,8 +14,8 @@ export default class Roudokuka {
       onend: null,
       onerror: null,
       onmark: null,
-      onpause: null, // stil buggy
-      onresume: null, // stil buggy
+      onpause: null, // still buggy any browser
+      onresume: null, // still buggy any browser
       onstart: null,
       pitch: 1,
       rate: 1,
@@ -63,7 +63,7 @@ export default class Roudokuka {
     this.utterance = new SpeechSynthesisUtterance()
     _merge(this.utterance, this.options, line)
 
-    // fix rate for desktop chrome
+    // fix rate for desktop chrome ubuntu
     // if(this.utterance.rate > 2) {
     //   this.utterance.rate = 2
     // }
