@@ -18,12 +18,29 @@ html
 
     section.section
       .container
+        .content
+          .title How to use roudokuka?
+          p You should load roudokuka somehow. if it's done, roudokuka is ready to use!!
+          h2 jsDelivr CDN:
+          p Add ↓ tag to somewhere.
+          pre
+            = '<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/roudokuka/docs/roudokuka.min.js"></script>'
+          h2 npm:
+          p roudokuka is published on npm.&nbsp;
+            a(href='https://www.npmjs.com/package/roudokuka' target='_blank')
+              | https://www.npmjs.com/package/roudokuka
+          p install with npm or yarn or something, and add line like this. ↓
+          pre
+            = "import Roudokuka from 'roudokuka'"
+            
+    section.section
+      .container
+        .title Examples
         article.message.is-info
           .message-header
             p How to try examples
           .message-body
             | Click "Result" of embedded JSFiddle.
-            
         .content
           .title simple usage
           <script async src="//jsfiddle.net/snowsunny/y6w2f4jv/embed/js,result/"></script>
@@ -33,6 +50,10 @@ html
           a(href='https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance' target='_blank')
             | SpeechSynthesisUtterance - Web APIs | MDN
           <script async src="//jsfiddle.net/snowsunny/60h2fqvs/embed/js,result/"></script>
+          hr
+          .title with global utterance options
+          p you can set global utterance options. options priority is "line's utterance" > "global utterance" > "roudokuka's default".
+          <script async src="//jsfiddle.net/snowsunny/9ou8koc7/embed/js,result/"></script>
           hr
           .title custom options with onend event
           p check with your browser console. roudokuka is return "speechSynthesisEvent" and "end line info" to callback of onend event.

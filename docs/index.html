@@ -17,6 +17,22 @@
     </section>
     <section class="section">
       <div class="container">
+        <div class="content">
+          <div class="title">How to use roudokuka?</div>
+          <p>You should load roudokuka somehow. if it's done, roudokuka is ready to use!!</p>
+          <h2>jsDelivr CDN:</h2>
+          <p>Add ↓ tag to somewhere.</p>
+          <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.jsdelivr.net/npm/roudokuka/docs/roudokuka.min.js&quot;&gt;&lt;/script&gt;</pre>
+          <h2>npm:</h2>
+          <p>roudokuka is published on npm.&nbsp;<a href="https://www.npmjs.com/package/roudokuka" target="_blank">https://www.npmjs.com/package/roudokuka</a></p>
+          <p>install with npm or yarn or something, and add line like this. ↓</p>
+          <pre>import Roudokuka from 'roudokuka'</pre>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="title">Examples</div>
         <article class="message is-info">
           <div class="message-header">
             <p>How to try examples</p>
@@ -28,6 +44,9 @@
           <hr>
           <div class="title">with utterance options</div>
           <p>you can check more options ↓ site.</p><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance" target="_blank">SpeechSynthesisUtterance - Web APIs | MDN</a><script async src="//jsfiddle.net/snowsunny/60h2fqvs/embed/js,result/"></script>
+          <hr>
+          <div class="title">with global utterance options</div>
+          <p>you can set global utterance options. options priority is "line's utterance" > "global utterance" > "roudokuka's default".</p><script async src="//jsfiddle.net/snowsunny/9ou8koc7/embed/js,result/"></script>
           <hr>
           <div class="title">custom options with onend event</div>
           <p>check with your browser console. roudokuka is return "speechSynthesisEvent" and "end line info" to callback of onend event.</p><script async src="//jsfiddle.net/snowsunny/c5sun8fj/embed/js,result/"></script>
