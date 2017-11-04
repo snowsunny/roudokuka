@@ -2,34 +2,45 @@ doctype html
 html
   head
     title Roudokuka examples
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css")
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   body
-    h1 Roudokuka examples
-    script(type='text/javascript').
-      let lines = []
-      for(let i = 1; i <= 40; i++) {
-        if(i % 3 == 0 || /3/.test(i)) {
-          lines.push({
-            text: i.toString(),
-            rate: 1.7,
-            pitch: 2
-          })
-        } else {
-          lines.push(i.toString())
-        }
-      }
-      let roudokuka = new Roudokuka(lines, {
-        onend: (e, currentLine) => {
-          console.log('onend: ', e, currentLine)
-        },
-        onresume: (e, currentLine) => {
-          console.log('onend: ', e, currentLine)
-        },
-        onLibrettoEnd: (e, currentLine) => {
-          console.log('onLibrettoEnd: ', e, currentLine)
-          roudokuka.start()
-        }
-      })
-      roudokuka.onReady().then(() => {
-        roudokuka.start()
-      })
+    section.hero.is-primary
+      .hero-body
+        .container
+          h1.title
+            | roudokuka examples
+          h2.subtitle
+            | roudokuka is simple web reader, it's created by browser feature only.
+            br
+            | "Roudokuka" == "朗読家" == "Reader"
+
+    section.section
+      .container
+        article.message.is-info
+          .message-header
+            p How to try examples
+          .message-body
+            | Click "Result" of embedded JSFiddle.
+            
+        .content
+          .title simple usage
+          <script async src="//jsfiddle.net/snowsunny/y6w2f4jv/embed/js,result/"></script>
+          hr
+          .title with utterance options
+          p you can check more options ↓ site.
+          a(href='https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance' target='_blank')
+            | SpeechSynthesisUtterance - Web APIs | MDN
+          <script async src="//jsfiddle.net/snowsunny/60h2fqvs/embed/js,result/"></script>
+          hr
+          .title custom options with onend event
+          p check with your browser console. roudokuka is return "speechSynthesisEvent" and "end line info" to callback of onend event.
+          <script async src="//jsfiddle.net/snowsunny/c5sun8fj/embed/js,result/"></script>
+          hr
+          .title loop with onLibrettoEnd event
+          <script async src="//jsfiddle.net/snowsunny/7m9r1nvL/embed/js,result/"></script>
+          hr
+          .title reader will stupid when reader count multiples of 3 or say 3
+          <script async src="//jsfiddle.net/snowsunny/va7wxyph/embed/js,result/"></script>
+    
