@@ -4,6 +4,8 @@ import BrowserSyncPlugin from 'browser-sync-webpack-plugin'
 import path from 'path'
 import webpack from 'webpack'
 
+let packageInfo = require('./package.json')
+
 module.exports = {
   entry: {
     'roudokuka': './src/js/index.js',
@@ -37,6 +39,12 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin(),
+    new webpack.BannerPlugin({
+      banner: `${packageInfo.name} v${packageInfo.version}
+Repository: https://github.com/snowsunny/roudokuka
+Copyright: snowsunny
+License: ${packageInfo.license}`
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/pug/index.pug',
