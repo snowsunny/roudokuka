@@ -41,6 +41,7 @@ html
             p How to try examples
           .message-body
             | Click "Result" of embedded JSFiddle.
+            b  [CAUTION] examples will play sound.
         .content
           .title simple usage
           <script async src="//jsfiddle.net/snowsunny/y6w2f4jv/embed/js,result/"></script>
@@ -52,7 +53,10 @@ html
           <script async src="//jsfiddle.net/snowsunny/60h2fqvs/embed/js,result/"></script>
           hr
           .title with global utterance options
-          p you can set global utterance options. options priority is "line's utterance" > "global utterance" > "roudokuka's default".
+          p
+            | you can set global utterance options. options priority is
+            b  "line's utterance" > "global utterance" > "roudokuka's default" > "browser's default"
+            | .
           <script async src="//jsfiddle.net/snowsunny/9ou8koc7/embed/js,result/"></script>
           hr
           .title custom options with onend event
