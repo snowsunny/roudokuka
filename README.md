@@ -98,6 +98,35 @@ roudokuka.onReady().then(() => {
 })
 ```
 
+#### Events
+roudokuka is can use with SpeechSynthesisUtterance's events. more help → https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
+```js
+let options = {
+  onend: (speechSynthesisEvent, lineObject) => {
+    // roudokuka is return "speechSynthesisEvent" and "lineObject" to callback of onend event.
+    console.log(speechSynthesisEvent, lineObject)
+  }
+}
+let roudokuka = new Roudokuka(['1, 2, 3', '4, 5, 6'], options)
+roudokuka.start()
+```
+
+#### onLibrettoEnd
+If read all lines in libretto property, this event is triggered.
+```js
+// loop with onLibrettoEnd event
+let loopCount = 0
+let roudokuka = new Roudokuka(['1, 2, 3', '4, 5, 6'], {
+  onLibrettoEnd: () => {
+    if(loopCount++ < 2) {
+      console.log(`Libretto is end. loop: ${loopCount}`)
+      roudokuka.start()
+    }
+  }
+})
+roudokuka.start()
+```
+
 <!--
 #### Properties
 
