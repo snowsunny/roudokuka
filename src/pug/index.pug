@@ -1,6 +1,13 @@
 doctype html
 html
   head
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-26365513-4')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-26365513-4');
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     title Roudokuka examples
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css")
