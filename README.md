@@ -10,6 +10,7 @@ https://snowsunny.github.io/roudokuka
 You must load roudokuka somehow. if it's done, roudokuka is ready to use!!
 
 ### jsDelivr CDN
+[![](https://data.jsdelivr.com/v1/package/npm/roudokuka/badge)](https://www.jsdelivr.com/package/npm/roudokuka)  
 Add ↓ tag to somewhere.
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/roudokuka/docs/roudokuka.min.js"></script>
