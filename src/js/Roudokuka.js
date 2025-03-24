@@ -6,7 +6,6 @@ export default class Roudokuka {
     this.libretto = new Libretto(lines)
     this.voices = []
     this.currentLine = undefined
-    this.interrupted = false
 
     this.defaultOptions = {
       lang: "",
@@ -53,7 +52,7 @@ export default class Roudokuka {
           this.voices = speechSynthesis.getVoices()
         } else {
           clearInterval(tryInterval)
-          resolve()
+          resolve(this)
         }
       }, 0)
     })
@@ -76,14 +75,10 @@ export default class Roudokuka {
     })
 
     this.utterance.onend = (e) => {
-      if(this.interrupted) {
-        this.interrupted = false
-      } else {
-        if(advancedCallbacks.onend) {
-          advancedCallbacks.onend(e, this.currentLine)
-        }
-        this.start()
+      if(advancedCallbacks.onend) {
+        advancedCallbacks.onend(e, this.currentLine)
       }
+      this.start()
     }
     this.utterance.onpause = (e) => {
       this._stopResumer()
@@ -102,9 +97,6 @@ export default class Roudokuka {
   }
 
   start(lineIndex) {
-    if(speechSynthesis.speaking) {
-      this.interrupted = true
-    }
     if(lineIndex >= 0) {
       this.libretto.curentLineIndex = lineIndex
     }
@@ -126,9 +118,6 @@ export default class Roudokuka {
   }
 
   stop() {
-    if(speechSynthesis.speaking) {
-      this.interrupted = true
-    }
     speechSynthesis.cancel()
     this._stopResumer()
   }

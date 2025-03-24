@@ -10,7 +10,7 @@ https://snowsunny.github.io/roudokuka
 You must load roudokuka somehow. if it's done, roudokuka is ready to use!!
 
 ### jsDelivr CDN
-[![](https://data.jsdelivr.com/v1/package/npm/roudokuka/badge)](https://www.jsdelivr.com/package/npm/roudokuka)  
+[![](https://data.jsdelivr.com/v1/package/npm/roudokuka/badge)](https://www.jsdelivr.com/package/npm/roudokuka)
 Add ↓ tag to somewhere.
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/roudokuka/docs/roudokuka.min.js"></script>
@@ -142,9 +142,6 @@ This property using for default options of roudokuka.
 
 #### options : object
 This property is merged options of default options to user options.
-
-#### interrupted : boolean (default = false)
-This property using for interrupted flag.
 
 #### voices : Array (default = [])
 This property have usable voices on working browser. this property is available on after use onReady method.
